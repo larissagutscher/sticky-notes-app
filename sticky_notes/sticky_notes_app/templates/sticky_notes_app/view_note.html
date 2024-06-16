@@ -1,0 +1,21 @@
+<!-- sticky_notes_app/templates/sticky_notes_app/view_note.html -->
+
+{% extends 'sticky_notes_app/base.html' %}
+
+{% block title %}View Sticky Note{% endblock %}
+
+{% block body %}
+    <h1>{{ note.title }}</h1>
+    <p>{{ note.content }}</p>
+    <p><strong>Author:</strong> {{ note.author }}</p>
+    <p><strong>Created date:</strong> {{ note.created_at }}</p>
+    <!-- Check if the user has permission to edit a sticky note -->
+    {% if perms.sticky_notes_app.change_stickynote %}
+    <p><a href="{% url 'edit_note' note.id %}">Edit Note</a></p>
+    {% endif %}
+    {% if perms.sticky_notes_app.delete_stickynote %}
+    <p><a href="{% url 'delete_note' note.id %}">Delete Note</a></p>
+    {% endif %}
+    <!-- Add a link back to the list of sticky notes -->
+    <p><a href="{% url 'index' %}">Back to Sticky Notes List</a></p>
+{% endblock %}

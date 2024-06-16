@@ -1,0 +1,16 @@
+<!-- authenticate/templates/registration/login.html -->
+
+{% extends 'registration/base.html' %}
+
+{% block title %}Log In{% endblock %}
+
+{% block content %}
+<h1>Log In to Your Account</h1>
+<form method="post" autocomplete="off">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br><input type="submit" value="Submit">
+</form>
+<h3>Don't have an account yet?</h3>
+<form action="{% url 'register' %}"><input type="submit" value="Register Account"></form>
+{% endblock %}

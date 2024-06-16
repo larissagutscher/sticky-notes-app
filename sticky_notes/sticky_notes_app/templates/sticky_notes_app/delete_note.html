@@ -1,0 +1,15 @@
+<!-- sticky_notes_app/templates/sticky_notes_app/delete_note.html -->
+
+{% extends 'sticky_notes_app/base.html' %}
+
+{% block title %}Delete Sticky Note{% endblock %}
+
+{% block body %}
+    <h1>Delete Sticky Note</h1>
+    <p>Are you sure you want to delete "{{ note.title }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirm Deletion</button>
+        <p><a href="{% url 'view_note' note.id %}">Cancel</a></p>
+    </form>
+{% endblock %}

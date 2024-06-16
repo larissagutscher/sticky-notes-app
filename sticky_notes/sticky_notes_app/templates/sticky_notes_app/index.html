@@ -1,0 +1,22 @@
+<!-- sticky_notes_app/templates/sticky_notes_app/index.html -->
+
+{% extends 'sticky_notes_app/base.html' %}
+
+{% block title %}Sticky Notes Board{% endblock %}
+
+{% block body %}
+    <h1>Sticky Notes</h1>
+    <ul>
+        {% for note in notes %}
+        <li><a href="{% url 'view_note' note.id %}">{{ note.title }}</a> - {{ note.created_at }} by {{ note.author }}</li>
+        {% endfor %}
+    </ul>
+    <!-- Check if user has permission to add a note -->
+    {% if perms.sticky_notes_app.add_stickynote %}
+    <p><a class="add-note-button" href="{% url 'add_note' %}">Add New Sticky Note</a></p>
+    {% endif %}
+    <!-- Check if user is logged in -->
+    {% if request.user.is_authenticated %}
+        <p><a class="back-button" href="{% url 'logout' %}">Logout</a></p>
+    {% endif %}
+{% endblock %}

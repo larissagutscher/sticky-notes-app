@@ -20,9 +20,10 @@ def register_user(request):
                 # Check permissions based on user's account type
                 if request.POST['account_type'] == 'poster':
                     group = Group.objects.get(name='Posters')
+                    new_user.groups.add(group)
                 elif request.POST['account_type'] == 'viewer':
                     group = Group.objects.get(name='Viewers')
-                new_user.groups.add(group)
+                    new_user.groups.add(group)
                 login(request, new_user)
                 return redirect('index')
     # If registration fails, create a new registration form
